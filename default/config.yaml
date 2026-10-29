@@ -70,8 +70,8 @@ whitelistDockerHosts: true
 basicAuthMode: true
 # Basic authentication credentials
 basicAuthUser:
-  username: "${ST_USER}"
-  password: "${ST_PASSWORD}"
+  username: ${ST_USER}
+  password: ${ST_PASSWORD}
 # Enables CORS proxy middleware
 enableCorsProxy: false
 # CORS settings (applied to all routes)
