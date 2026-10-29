@@ -47,7 +47,11 @@ RUN \
 # Fix extension repos permissions
 RUN git config --global --add safe.directory "*"
 
-EXPOSE 8000
+EXPOSE 8080
+
+#VP ai suggestion fixing zeabur 502
+CMD ["node", "server.js", "--port", "8080"]
+
 
 # Ensure proper handling of kernel signals
-ENTRYPOINT ["tini", "--", "./docker-entrypoint.sh"]
+#ENTRYPOINT ["tini", "--", "./docker-entrypoint.sh"]
