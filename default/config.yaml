@@ -3,7 +3,7 @@
 dataRoot: ./data
 # -- SERVER CONFIGURATION --
 # Listen for incoming connections
-listen: false
+listen: true
 # Listen on a specific address, supports IPv4 and IPv6
 listenAddress:
   ipv4: 0.0.0.0
@@ -28,7 +28,7 @@ browserLaunch:
   # Overrides the hostname that opens in the browser.
   # - Use "auto" to let the server decide
   # - Use options like 'localhost', 'st.example.com'
-  hostname: 'auto'
+  hostname: '0.0.0.0'
   # Overrides the port for run in the browser.
   # - Use -1 to use the server port.
   # - Specify a port to override the default.
@@ -37,7 +37,7 @@ browserLaunch:
   # Use if you don't have 'localhost' in your hosts file
   avoidLocalhost: false
 # Server port
-port: 8000
+port: ${PORT}
 # Interval in seconds to write a heartbeat file. Set to 0 to disable.
 # This is used primarily for Docker healthchecks.
 heartbeatInterval: 0
@@ -391,6 +391,6 @@ gemini:
     # Leave empty to use the API-default value.
     personGeneration: 'allow_adult'
 # -- SERVER PLUGIN CONFIGURATION --
-enableServerPlugins: false
+enableServerPlugins: true
 # Attempt to automatically update server plugins on startup
 enableServerPluginsAutoUpdate: true
