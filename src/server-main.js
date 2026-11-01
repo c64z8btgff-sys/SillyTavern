@@ -101,6 +101,9 @@ http.globalAgent = new http.Agent({ keepAlive: cliArgs.enableKeepAlive });
 https.globalAgent = new https.Agent({ keepAlive: cliArgs.enableKeepAlive });
 
 const app = express();
+const relayPlugin = await import('../plugins/quick-image-gen-relay/pre-parser.js');
+const { installRelayPreParser } = relayPlugin.default ?? relayPlugin;
+installRelayPreParser(app);
 app.use(helmet({
     contentSecurityPolicy: false,
 }));
