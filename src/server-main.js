@@ -106,11 +106,6 @@ const app = express();
 //const { installRelayPreParser } = relayPlugin.default ?? relayPlugin;
 //installRelayPreParser(app);
 
-// --- ZEABUR SOECIFIC QIG Extension Pre-Parser Integration ---
-const relayPlugin = await import('/src/plugins/quick-image-gen-relay/pre-parser.js');
-const { installRelayPreParser } = relayPlugin.default ?? relayPlugin;
-installRelayPreParser(app);
-// --------------------------------------------
 app.use(helmet({
     contentSecurityPolicy: false,
 }));
