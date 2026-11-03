@@ -102,9 +102,9 @@ https.globalAgent = new https.Agent({ keepAlive: cliArgs.enableKeepAlive });
 
 const app = express();
 //QIG extension pre parser integration
-//const relayPlugin = await import('../plugins/quick-image-gen-relay/pre-parser.js');
-//const { installRelayPreParser } = relayPlugin.default ?? relayPlugin;
-//installRelayPreParser(app);
+const relayPlugin = await import('../plugins/quick-image-gen-relay/pre-parser.js');
+const { installRelayPreParser } = relayPlugin.default ?? relayPlugin;
+installRelayPreParser(app);
 //-----
 //zeabur adaptation for pre parser
 //QIG extension pre parser integration
