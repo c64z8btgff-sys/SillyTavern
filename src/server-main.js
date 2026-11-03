@@ -102,22 +102,22 @@ https.globalAgent = new https.Agent({ keepAlive: cliArgs.enableKeepAlive });
 
 const app = express();
 //QIG extension pre parser integration
-const relayPlugin = await import('../plugins/quick-image-gen-relay/pre-parser.js');
-const { installRelayPreParser } = relayPlugin.default ?? relayPlugin;
-installRelayPreParser(app);
+//const relayPlugin = await import('../plugins/quick-image-gen-relay/pre-parser.js');
+//const { installRelayPreParser } = relayPlugin.default ?? relayPlugin;
+//installRelayPreParser(app);
 //-----
 //zeabur adaptation for pre parser
 //QIG extension pre parser integration
-//let relayPlugin;
-//try {
+let relayPlugin;
+try {
     // Try Option A: If plugins folder sits inside src/
-//    relayPlugin = await import('./plugins/quick-image-gen-relay/pre-parser.js');
-//} catch (e) {
+    relayPlugin = await import('./plugins/quick-image-gen-relay/pre-parser.js');
+} catch (e) {
     // Try Option B: Fallback if plugins folder sits outside src/
-//    relayPlugin = await import('../plugins/quick-image-gen-relay/pre-parser.js');
-//}
-//const { installRelayPreParser } = relayPlugin.default ?? relayPlugin;
-//installRelayPreParser(app);
+    relayPlugin = await import('../plugins/quick-image-gen-relay/pre-parser.js');
+}
+const { installRelayPreParser } = relayPlugin.default ?? relayPlugin;
+installRelayPreParser(app);
 
 
 app.use(helmet({
