@@ -43,7 +43,7 @@ port: 8080
 heartbeatInterval: 0
 # Enable HTTP/HTTPS keep-alive globally.
 # Disabling restores old Node 18 behavior, can help if ECONNRESET and other network errors occur.
-enableKeepAlive: false
+enableKeepAlive: true
 # -- SSL options --
 ssl:
   # Enable SSL/TLS encryption
@@ -212,7 +212,7 @@ forwardedHeaders:
   # X-Forwarded-For header (common with many proxies, but may contain multiple IPs - only the first one will be used)
   xForwardedFor: true
   # CF-Connecting-IP header (used by Cloudflare Tunnels)
-  cfConnectingIp: false
+  cfConnectingIp: true
 
 ## BACKUP CONFIGURATION
 backups:
