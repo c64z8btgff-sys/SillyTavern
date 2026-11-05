@@ -108,7 +108,14 @@ function createRelayPreParser(options = {}) {
         relayOnly(rejectLateMount),
         relayOnly(createBodyReadDeadline(options)),
         relayOnly(validateRelayRequestHeaders),
-       // relayOnly(parseJson),
+        // relayOnly(parseJson),
+        // SAFE PARSE: If Zeabur/Host already parsed the body, skip calling parseJson
+        relayOnly((req, res, next) => {
+            if (req.body !== undefined && typeof req.body === 'object') {
+                return next();
+            }
+            return parseJson(req, res, next);
+        }),
         handleJsonParserError,
         relayOnly(validateRelayRequestBody),
         relayOnly(markPreparsed),
