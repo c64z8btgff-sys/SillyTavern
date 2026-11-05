@@ -109,13 +109,28 @@ function createRelayPreParser(options = {}) {
         relayOnly(createBodyReadDeadline(options)),
         relayOnly(validateRelayRequestHeaders),
         // relayOnly(parseJson),
-        // SAFE PARSE: If Zeabur/Host already parsed the body, skip calling parseJson
+            // RE-HYDRATION PARSE FOR ZEABUR
         relayOnly((req, res, next) => {
             if (req.body !== undefined && typeof req.body === 'object') {
+                // Downstream scripts require the raw body data to still exist on the buffer
+                // This re-attaches the parsed object back into a readable buffer string
+                req.rawBody = JSON.stringify(req.body); 
                 return next();
             }
-            return parseJson(req, res, next);
+            // If it wasn't parsed yet, track the raw body while parsing it
+            return express.json({
+                limit: MAX_RELAY_REQUEST_BYTES,
+                type: ["application/json", "application/*+json"],
+                verify: (req, res, buf) => { req.rawBody = buf.toString(); }
+            })(req, res, next);
         }),
+        // SAFE PARSE: If Zeabur/Host already parsed the body, skip calling parseJson
+      //  relayOnly((req, res, next) => {
+     //       if (req.body !== undefined && typeof req.body === 'object') {
+      //          return next();
+      //      }
+     //       return parseJson(req, res, next);
+      //  }),
         handleJsonParserError,
         relayOnly(validateRelayRequestBody),
         relayOnly(markPreparsed),
