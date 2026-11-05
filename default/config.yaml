@@ -397,4 +397,4 @@ gemini:
 # -- SERVER PLUGIN CONFIGURATION --
 enableServerPlugins: true
 # Attempt to automatically update server plugins on startup
-enableServerPluginsAutoUpdate: true
+enableServerPluginsAutoUpdate: false
