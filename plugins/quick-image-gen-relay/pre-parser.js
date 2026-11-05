@@ -32,12 +32,13 @@ function relayOnly(handler) {
 }
 
 function rejectLateMount(req, res, next) {
-    if (req.body !== undefined) {
+   /* if (req.body !== undefined) {
         res.status(503).type("application/json").send(JSON.stringify({
             error: "Quick Image Gen relay pre-parser must run before the host body parser",
         }));
         return;
     }
+    */
     req[PREPARSER_STARTED] = true;
     next();
 }
