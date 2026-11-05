@@ -108,7 +108,7 @@ function createRelayPreParser(options = {}) {
         relayOnly(rejectLateMount),
         relayOnly(createBodyReadDeadline(options)),
         relayOnly(validateRelayRequestHeaders),
-        relayOnly(parseJson),
+       // relayOnly(parseJson),
         handleJsonParserError,
         relayOnly(validateRelayRequestBody),
         relayOnly(markPreparsed),
